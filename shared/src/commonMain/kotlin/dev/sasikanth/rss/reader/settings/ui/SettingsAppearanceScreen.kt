@@ -289,6 +289,15 @@ private fun SettingsAppearanceContent(
         }
 
         item {
+          SettingsSwitchItem(
+            title = stringResource(Res.string.settingsPinTopBarOnScroll),
+            subtitle = stringResource(Res.string.settingsPinTopBarOnScrollSubtitle),
+            checked = state.pinTopBarOnScroll,
+            onValueChanged = { dispatch(SettingsEvent.TogglePinTopBarOnScroll(it)) },
+          )
+        }
+
+        item {
           AppIconSettingItem(
             appIcon = state.appIcon,
             isSubscribed = state.isSubscribed,

@@ -309,6 +309,7 @@ class HomeViewModel(
             settingsRepository.showFeaturedSection,
             settingsRepository.themeVariant,
             settingsRepository.showPinnedSources,
+            settingsRepository.pinTopBarOnScroll,
             settingsRepository.markAsReadOn,
             ::HomeSelectionFiltersCombined,
           ),
@@ -321,6 +322,7 @@ class HomeViewModel(
             showFeaturedSection = combined.showFeaturedSection,
             themeVariant = combined.themeVariant,
             showPinnedSources = combined.showPinnedSources,
+            pinTopBarOnScroll = combined.pinTopBarOnScroll,
             markAsReadOn = combined.markAsReadOn,
           )
         },
@@ -340,6 +342,7 @@ class HomeViewModel(
             showFeaturedSection = selectionFilters.showFeaturedSection,
             themeVariant = selectionFilters.themeVariant,
             showPinnedSources = selectionFilters.showPinnedSources,
+            pinTopBarOnScroll = selectionFilters.pinTopBarOnScroll,
             markAsReadOn = selectionFilters.markAsReadOn,
             hasUnreadPosts = unreadStatus.hasUnreadPosts,
             unreadSinceLastSync = unreadStatus.unreadSinceLastSync,
@@ -470,6 +473,7 @@ private data class HomeSelectionFiltersCombined(
   val showFeaturedSection: Boolean,
   val themeVariant: ThemeVariant,
   val showPinnedSources: Boolean,
+  val pinTopBarOnScroll: Boolean,
   val markAsReadOn: MarkAsReadOn,
 )
 
@@ -481,6 +485,7 @@ private data class HomeSelectionFilters(
   val showFeaturedSection: Boolean,
   val themeVariant: ThemeVariant,
   val showPinnedSources: Boolean,
+  val pinTopBarOnScroll: Boolean,
   val markAsReadOn: MarkAsReadOn,
 )
 

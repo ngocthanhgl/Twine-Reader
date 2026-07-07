@@ -70,6 +70,7 @@ data class SettingsState(
   val showFreeFeedLimitWarning: Boolean,
   val blockedWordsCount: Int,
   val readerFont: ReaderFont,
+  val pinTopBarOnScroll: Boolean,
 ) {
 
   val isSubscribed: Boolean
@@ -124,6 +125,7 @@ data class SettingsState(
         showFreeFeedLimitWarning = false,
         blockedWordsCount = 0,
         readerFont = ReaderFont.Outfit,
+        pinTopBarOnScroll = false,
       )
   }
 }

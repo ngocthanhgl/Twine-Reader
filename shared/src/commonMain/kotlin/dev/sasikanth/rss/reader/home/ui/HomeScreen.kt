@@ -246,10 +246,19 @@ private fun HomeContent(
     }
 
   val canShowBottomBar = platform !is Platform.Desktop && state.showPinnedSources
-  val appBarScrollBehaviour = TopAppBarDefaults.enterAlwaysScrollBehavior()
+  val canAnyBarScroll = !state.pinTopBarOnScroll
+  val appBarScrollBehaviour =
+    if (canAnyBarScroll) TopAppBarDefaults.enterAlwaysScrollBehavior() else null
   val bottomBarScrollState =
-    rememberPinnedSourcesBottomBarScrollBehavior(canScroll = { canShowBottomBar })
-  val homeScrollBehavior = rememberHomeScrollBehavior(appBarScrollBehaviour, bottomBarScrollState)
+    rememberPinnedSourcesBottomBarScrollBehavior(
+      canScroll = { canShowBottomBar && canAnyBarScroll }
+    )
+  val homeScrollBehavior =
+    if (appBarScrollBehaviour != null) {
+      rememberHomeScrollBehavior(appBarScrollBehaviour, bottomBarScrollState)
+    } else {
+      null
+    }
 
   val onSourceClick =
     remember(feedsDispatch) { { feed: Source -> feedsDispatch(FeedsEvent.OnSourceClick(feed)) } }
@@ -264,8 +273,8 @@ private fun HomeContent(
   LaunchedEffect(state.activeSource) {
     if (state.activeSource != state.prevActiveSource) {
       bottomBarScrollState.state.heightOffset = 0f
-      appBarScrollBehaviour.state.heightOffset = 0f
-      appBarScrollBehaviour.state.contentOffset = 0f
+      appBarScrollBehaviour?.state?.heightOffset = 0f
+      appBarScrollBehaviour?.state?.contentOffset = 0f
     }
   }
 
@@ -346,7 +355,7 @@ private fun HomeContent(
           .iosBottomSafeAreaPadding()
     ) {
       val nestedScrollModifier =
-        if (platform !is Platform.Desktop) {
+        if (platform !is Platform.Desktop && homeScrollBehavior != null) {
           Modifier.nestedScroll(homeScrollBehavior.nestedScrollConnection)
         } else {
           Modifier

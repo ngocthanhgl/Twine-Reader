@@ -217,6 +217,10 @@ class SettingsViewModel(
     settingsRepository.readerFontStyle
       .onEach { font -> _state.update { it.copy(readerFont = font) } }
       .launchIn(viewModelScope)
+
+    settingsRepository.pinTopBarOnScroll
+      .onEach { value -> _state.update { it.copy(pinTopBarOnScroll = value) } }
+      .launchIn(viewModelScope)
   }
 
   fun dispatch(event: SettingsEvent) {
@@ -228,6 +232,7 @@ class SettingsViewModel(
       is SettingsEvent.ToggleShowFeedFavIcon -> toggleShowFeedFavIcon(event.value)
       is SettingsEvent.ToggleShowFeaturedSection -> toggleShowFeaturedSection(event.value)
       is SettingsEvent.ToggleShowPinnedSources -> toggleShowPinnedSources(event.value)
+      is SettingsEvent.TogglePinTopBarOnScroll -> togglePinTopBarOnScroll(event.value)
       SettingsEvent.ImportOpmlClicked -> importOpmlClicked()
       SettingsEvent.ExportOpmlClicked -> exportOpmlClicked()
       SettingsEvent.CancelOpmlImportOrExport -> cancelOpmlImportOrExport()
@@ -369,6 +374,10 @@ class SettingsViewModel(
 
   private fun toggleShowPinnedSources(value: Boolean) {
     viewModelScope.launch { settingsRepository.toggleShowPinnedSources(value) }
+  }
+
+  private fun togglePinTopBarOnScroll(value: Boolean) {
+    viewModelScope.launch { settingsRepository.togglePinTopBarOnScroll(value) }
   }
 
   private fun toggleAutoSync(value: Boolean) {

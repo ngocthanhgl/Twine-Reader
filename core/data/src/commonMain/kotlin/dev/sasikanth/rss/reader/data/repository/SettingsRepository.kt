@@ -73,6 +73,7 @@ class SettingsRepository(
   private val discoveryFeedsLastFetchTimeKey = longPreferencesKey("discovery_feeds_last_fetch_time")
   private val discoveryFeedsCacheKey = stringPreferencesKey("discovery_feeds_cache")
   private val showPinnedSourcesKey = booleanPreferencesKey("show_pinned_sources")
+  private val pinTopBarOnScrollKey = booleanPreferencesKey("pref_pin_top_bar_on_scroll")
   private val showFeaturedSectionKey = booleanPreferencesKey("show_featured_section")
   private val lastSeenChangelogVersionKey = stringPreferencesKey("last_seen_changelog_version")
   private val lastWidgetPreviewUpdateTimeKey = longPreferencesKey("last_widget_preview_update_time")
@@ -125,6 +126,9 @@ class SettingsRepository(
 
   val showPinnedSources: Flow<Boolean> =
     dataStore.data.map { preferences -> preferences[showPinnedSourcesKey] ?: true }
+
+  val pinTopBarOnScroll: Flow<Boolean> =
+    dataStore.data.map { preferences -> preferences[pinTopBarOnScrollKey] ?: false }
 
   val showFeaturedSection: Flow<Boolean> =
     dataStore.data.map { preferences -> preferences[showFeaturedSectionKey] ?: true }
@@ -265,6 +269,10 @@ class SettingsRepository(
 
   suspend fun toggleShowFeaturedSection(value: Boolean) {
     dataStore.edit { preferences -> preferences[showFeaturedSectionKey] = value }
+  }
+
+  suspend fun togglePinTopBarOnScroll(value: Boolean) {
+    dataStore.edit { preferences -> preferences[pinTopBarOnScrollKey] = value }
   }
 
   suspend fun updateMarkAsReadOn(value: MarkAsReadOn) {
