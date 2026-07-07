@@ -536,17 +536,17 @@ private fun HomeContent(
               }
             }
             launch {
-              animate(initialValue = appBarScrollBehaviour.state.heightOffset, targetValue = 0f) {
+              animate(initialValue = appBarScrollBehaviour?.state?.heightOffset ?: 0f, targetValue = 0f) {
                 value,
                 _ ->
-                appBarScrollBehaviour.state.heightOffset = value
+                appBarScrollBehaviour?.state?.heightOffset = value
               }
             }
             launch {
-              animate(initialValue = appBarScrollBehaviour.state.contentOffset, targetValue = 0f) {
+              animate(initialValue = appBarScrollBehaviour?.state?.contentOffset ?: 0f, targetValue = 0f) {
                 value,
                 _ ->
-                appBarScrollBehaviour.state.contentOffset = value
+                appBarScrollBehaviour?.state?.contentOffset = value
               }
             }
             postsListState.animateScrollToItem(0)
@@ -563,17 +563,17 @@ private fun HomeContent(
             }
           }
           launch {
-            animate(initialValue = appBarScrollBehaviour.state.heightOffset, targetValue = 0f) {
+            animate(initialValue = appBarScrollBehaviour?.state?.heightOffset ?: 0f, targetValue = 0f) {
               value,
               _ ->
-              appBarScrollBehaviour.state.heightOffset = value
+              appBarScrollBehaviour?.state?.heightOffset = value
             }
           }
           launch {
-            animate(initialValue = appBarScrollBehaviour.state.contentOffset, targetValue = 0f) {
+            animate(initialValue = appBarScrollBehaviour?.state?.contentOffset ?: 0f, targetValue = 0f) {
               value,
               _ ->
-              appBarScrollBehaviour.state.contentOffset = value
+              appBarScrollBehaviour?.state?.contentOffset = value
             }
           }
           postsListState.animateScrollToItem(0)

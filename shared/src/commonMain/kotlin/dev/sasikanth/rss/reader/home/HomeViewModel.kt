@@ -305,14 +305,28 @@ class HomeViewModel(
         combine(
           combine(activeSourceFlow, postsTypeFlow, settingsRepository.postsSortOrder, ::Triple),
           combine(
-            settingsRepository.homeViewMode,
-            settingsRepository.showFeaturedSection,
-            settingsRepository.themeVariant,
-            settingsRepository.showPinnedSources,
-            settingsRepository.pinTopBarOnScroll,
-            settingsRepository.markAsReadOn,
-            ::HomeSelectionFiltersCombined,
-          ),
+            combine(
+              settingsRepository.homeViewMode,
+              settingsRepository.showFeaturedSection,
+              settingsRepository.themeVariant,
+              ::Triple,
+            ),
+            combine(
+              settingsRepository.showPinnedSources,
+              settingsRepository.pinTopBarOnScroll,
+              settingsRepository.markAsReadOn,
+              ::Triple,
+            ),
+          ) { (homeViewMode, showFeaturedSection, themeVariant), (showPinnedSources, pinTopBarOnScroll, markAsReadOn) ->
+            HomeSelectionFiltersCombined(
+              homeViewMode = homeViewMode,
+              showFeaturedSection = showFeaturedSection,
+              themeVariant = themeVariant,
+              showPinnedSources = showPinnedSources,
+              pinTopBarOnScroll = pinTopBarOnScroll,
+              markAsReadOn = markAsReadOn,
+            )
+          },
         ) { group1, combined ->
           HomeSelectionFilters(
             activeSource = group1.first,

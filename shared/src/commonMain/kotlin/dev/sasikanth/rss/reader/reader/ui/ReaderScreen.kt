@@ -41,6 +41,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -261,7 +262,7 @@ internal fun ReaderScreen(
 
     val readerTypography =
       typography(
-        fontFamily = MaterialTheme.typography.bodyLarge.fontFamily,
+        fontFamily = MaterialTheme.typography.bodyLarge.fontFamily ?: FontFamily.Default,
         fontScalingFactor = state.readerFontScaleFactor,
         lineHeightScalingFactor = state.readerLineHeightScaleFactor,
       )
