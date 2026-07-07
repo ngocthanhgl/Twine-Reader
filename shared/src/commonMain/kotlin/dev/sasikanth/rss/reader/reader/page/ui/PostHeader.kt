@@ -77,7 +77,7 @@ internal fun PostHeader(
     if (!postImage.isNullOrBlank()) {
       Box(
         modifier =
-          Modifier.padding(horizontal = 6.dp).align(Alignment.CenterHorizontally).clickable {
+          Modifier.padding(horizontal = 22.dp).align(Alignment.CenterHorizontally).clickable {
             onImageClick(postImage)
           }
       ) {
