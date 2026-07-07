@@ -290,8 +290,8 @@ private fun SettingsAppearanceContent(
 
         item {
           SettingsSwitchItem(
-            title = stringResource(Res.string.prefPinTopBarOnScroll),
-            subtitle = stringResource(Res.string.prefPinTopBarOnScrollSubtitle),
+            title = stringResource(Res.string.pin_top_bar_on_scroll),
+            subtitle = stringResource(Res.string.pin_top_bar_on_scroll_subtitle),
             checked = state.pinTopBarOnScroll,
             onValueChanged = { dispatch(SettingsEvent.TogglePinTopBarOnScroll(it)) },
           )
