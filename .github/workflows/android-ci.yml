@@ -24,13 +24,13 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Build fullDebug APK
-        run: ./gradlew assembleFullDebug -PVERSION_CODE=${{ github.run_number }} -PVERSION_NAME=1.0.${{ github.run_number }}
+      - name: Build fossDebug APK
+        run: ./gradlew assembleFossDebug -PVERSION_CODE=${{ github.run_number }} -PVERSION_NAME=1.0.${{ github.run_number }}
         env:
           BUGSNAG_API_KEY: ""
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: twine-full-debug
-          path: androidApp/build/outputs/apk/full/debug/*.apk
+          name: twine-foss-debug
+          path: androidApp/build/outputs/apk/foss/debug/*.apk
