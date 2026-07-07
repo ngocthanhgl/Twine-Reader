@@ -97,7 +97,7 @@ internal fun PostHeader(
       Spacer(modifier = Modifier.requiredHeight(16.dp))
     }
 
-    Column {
+    Column(modifier = Modifier.padding(horizontal = 24.dp)) {
       Text(
         modifier =
           Modifier.graphicsLayer {
@@ -129,7 +129,7 @@ internal fun PostHeader(
         )
       }
 
-      Spacer(Modifier.requiredHeight(12.dp))
+      Spacer(Modifier.requiredHeight(4.dp))
 
       DisableSelection {
         var showDropdown by remember { mutableStateOf(false) }
