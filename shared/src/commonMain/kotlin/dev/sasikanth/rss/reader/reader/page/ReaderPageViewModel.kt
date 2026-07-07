@@ -85,7 +85,7 @@ class ReaderPageViewModel(
   private val _parsingProgress = MutableStateFlow(ReaderProcessingProgress.Loading)
   val parsingProgress: StateFlow<ReaderProcessingProgress> = _parsingProgress
 
-  private val _showFullArticle = MutableStateFlow(readerPost.alwaysFetchFullArticle)
+  private val _showFullArticle = MutableStateFlow(true)
   val showFullArticle: StateFlow<Boolean> = _showFullArticle
 
   private var autoSaveJob: Job? = null
