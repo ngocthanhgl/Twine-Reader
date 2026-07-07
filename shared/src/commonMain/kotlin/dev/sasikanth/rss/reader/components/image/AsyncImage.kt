@@ -23,7 +23,6 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import coil3.compose.LocalPlatformContext
 import coil3.request.ImageRequest
-import coil3.request.crossfade
 import coil3.size.Dimension
 import coil3.size.Size
 import dev.sasikanth.rss.reader.utils.LocalBlockImage
@@ -53,7 +52,6 @@ internal fun AsyncImage(
           .size(size)
           .diskCacheKey(url)
           .memoryCacheKey(url)
-          .crossfade(true)
           .decoderCoroutineContext(Dispatchers.IO.limitedParallelism(4))
           .build(),
       contentDescription = contentDescription,
