@@ -19,8 +19,12 @@ package dev.sasikanth.rss.reader.reader.page.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -223,7 +227,7 @@ private fun ReaderPageContent(
             overscrollEffect = null,
             contentPadding =
               PaddingValues(
-                top = contentPaddingValues.calculateTopPadding(),
+                top = WindowInsets.systemBars.only(WindowInsetsSides.Top).asPaddingValues().calculateTopPadding(),
                 bottom = contentPaddingValues.calculateBottomPadding() + 24.dp,
               ),
           ) {

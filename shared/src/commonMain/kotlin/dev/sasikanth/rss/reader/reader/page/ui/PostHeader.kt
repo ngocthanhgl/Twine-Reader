@@ -37,7 +37,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import dev.sasikanth.rss.reader.core.model.local.ResolvedPost
@@ -97,7 +96,7 @@ internal fun PostHeader(
       Spacer(modifier = Modifier.requiredHeight(16.dp))
     }
 
-    Column(modifier = Modifier.padding(horizontal = 24.dp)) {
+    Column(modifier = Modifier.padding(horizontal = 22.dp)) {
       Text(
         modifier =
           Modifier.graphicsLayer {
@@ -112,8 +111,7 @@ internal fun PostHeader(
           },
         text = title.ifBlank { description },
         style = MaterialTheme.typography.headlineMedium,
-        fontWeight = FontWeight.Bold,
-        color = AppTheme.colorScheme.secondary,
+        color = AppTheme.colorScheme.onSurfaceVariant,
         overflow = TextOverflow.Ellipsis,
       )
 
@@ -123,7 +121,7 @@ internal fun PostHeader(
         Text(
           text = excerpt,
           style = MaterialTheme.typography.bodyMedium,
-          color = AppTheme.colorScheme.secondary,
+          color = AppTheme.colorScheme.outline,
           maxLines = 3,
           overflow = TextOverflow.Ellipsis,
         )
