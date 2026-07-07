@@ -290,8 +290,8 @@ private fun SettingsAppearanceContent(
 
         item {
           SettingsSwitchItem(
-            title = stringResource(Res.string.pin_top_bar_on_scroll),
-            subtitle = stringResource(Res.string.pin_top_bar_on_scroll_subtitle),
+            title = "Pin top bar on scroll",
+            subtitle = "Keep the top bar visible while scrolling",
             checked = state.pinTopBarOnScroll,
             onValueChanged = { dispatch(SettingsEvent.TogglePinTopBarOnScroll(it)) },
           )
