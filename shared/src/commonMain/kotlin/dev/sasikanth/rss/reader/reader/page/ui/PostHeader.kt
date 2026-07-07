@@ -77,7 +77,7 @@ internal fun PostHeader(
     if (!postImage.isNullOrBlank()) {
       Box(
         modifier =
-          Modifier.padding(horizontal = 16.dp).align(Alignment.CenterHorizontally).clickable {
+          Modifier.padding(horizontal = 6.dp).align(Alignment.CenterHorizontally).clickable {
             onImageClick(postImage)
           }
       ) {
@@ -94,13 +94,13 @@ internal fun PostHeader(
         )
       }
 
-      Spacer(modifier = Modifier.requiredHeight(8.dp))
+      Spacer(modifier = Modifier.requiredHeight(16.dp))
     }
 
-    Column(modifier = Modifier.padding(horizontal = 24.dp)) {
+    Column {
       Text(
         modifier =
-          Modifier.padding(top = 12.dp).graphicsLayer {
+          Modifier.graphicsLayer {
             if (themeVariant == ThemeVariant.Dynamic) {
               blendMode =
                 if (themeVariant.isDark(darkTheme)) {
