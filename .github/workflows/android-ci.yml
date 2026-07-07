@@ -33,7 +33,7 @@ jobs:
             -dname "CN=CI, OU=CI, O=CI, L=CI, S=CI, C=CI"
 
       - name: Build fullRelease APK
-        run: ./gradlew assembleFullRelease -PREADER_KEYSTORE_PASSWORD=android -PREADER_KEY_PASSWORD=android -PVERSION_CODE=${{ github.run_number }} -PVERSION_NAME=1.0.${{ github.run_number }}
+        run: ./gradlew clean assembleFullRelease -PREADER_KEYSTORE_PASSWORD=android -PREADER_KEY_PASSWORD=android -PVERSION_CODE=${{ github.run_number }} -PVERSION_NAME=1.0.${{ github.run_number }} --no-build-cache
         env:
           BUGSNAG_API_KEY: ""
 

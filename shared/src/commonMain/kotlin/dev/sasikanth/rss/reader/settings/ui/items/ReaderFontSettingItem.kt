@@ -41,6 +41,7 @@ import dev.sasikanth.rss.reader.components.DropdownMenuItem
 import dev.sasikanth.rss.reader.data.repository.ReaderFont
 import dev.sasikanth.rss.reader.data.repository.isPremium
 import dev.sasikanth.rss.reader.resources.icons.StarShine
+import dev.sasikanth.rss.reader.resources.icons.ArrowDown
 import dev.sasikanth.rss.reader.resources.icons.TwineIcons
 import dev.sasikanth.rss.reader.ui.AppTheme
 import org.jetbrains.compose.resources.stringResource
