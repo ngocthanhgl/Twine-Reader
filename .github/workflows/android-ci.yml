@@ -24,13 +24,22 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Build fossDebug APK
-        run: ./gradlew assembleFossDebug -PVERSION_CODE=${{ github.run_number }} -PVERSION_NAME=1.0.${{ github.run_number }}
+      - name: Decode keystore
+        run: |
+          mkdir -p release
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > release/reader.jks
+
+      - name: Build fossRelease APK
+        run: ./gradlew assembleFossRelease \
+          -PREADER_KEYSTORE_PASSWORD=${{ secrets.KEYSTORE_PASSWORD }} \
+          -PREADER_KEY_PASSWORD=${{ secrets.KEY_PASSWORD }} \
+          -PVERSION_CODE=${{ github.run_number }} \
+          -PVERSION_NAME=1.0.${{ github.run_number }}
         env:
           BUGSNAG_API_KEY: ""
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: twine-foss-debug
-          path: androidApp/build/outputs/apk/foss/debug/*.apk
+          name: twine-foss-release
+          path: androidApp/build/outputs/apk/foss/release/*.apk
