@@ -115,15 +115,8 @@ import dev.sasikanth.rss.reader.resources.icons.TwineIcons
 import dev.sasikanth.rss.reader.resources.icons.platform
 import dev.sasikanth.rss.reader.ui.AppColorScheme
 import dev.sasikanth.rss.reader.ui.AppTheme
-import dev.sasikanth.rss.reader.ui.ComicNeueFontFamily
-import dev.sasikanth.rss.reader.ui.GolosFontFamily
-import dev.sasikanth.rss.reader.ui.GoogleSansFontFamily
 import dev.sasikanth.rss.reader.ui.LocalDynamicColorState
 import dev.sasikanth.rss.reader.ui.LocalSeedColorExtractor
-import dev.sasikanth.rss.reader.ui.LoraFontFamily
-import dev.sasikanth.rss.reader.ui.MerriWeatherFontFamily
-import dev.sasikanth.rss.reader.ui.OutfitFontFamily
-import dev.sasikanth.rss.reader.ui.RobotoSerifFontFamily
 import dev.sasikanth.rss.reader.ui.getOverriddenColorScheme
 import dev.sasikanth.rss.reader.ui.rememberDynamicColorState
 import dev.sasikanth.rss.reader.ui.systemDynamicColorScheme
@@ -237,22 +230,6 @@ internal fun ReaderScreen(
 
   val snackbarHostState = remember { SnackbarHostState() }
   val scrollBehaviour = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
-  val fontFamily =
-    when (state.selectedReaderFont) {
-      ReaderFont.ComicNeue -> ComicNeueFontFamily
-      ReaderFont.GoogleSans -> GoogleSansFontFamily
-      ReaderFont.Golos -> GolosFontFamily
-      ReaderFont.Lora -> LoraFontFamily
-      ReaderFont.Merriweather -> MerriWeatherFontFamily
-      ReaderFont.RobotoSerif -> RobotoSerifFontFamily
-      ReaderFont.Outfit -> OutfitFontFamily
-    }
-  val typography =
-    typography(
-      fontFamily = fontFamily,
-      fontScalingFactor = state.readerFontScaleFactor,
-      lineHeightScalingFactor = state.readerLineHeightScaleFactor,
-    )
 
   CompositionLocalProvider(
     LocalDynamicColorState provides articleDynamicColorState,
@@ -282,9 +259,16 @@ internal fun ReaderScreen(
         systemDynamicDarkColors ?: state.selectedThemeVariant.getOverriddenColorScheme(true)
       }
 
+    val readerTypography =
+      typography(
+        fontFamily = MaterialTheme.typography.bodyLarge.fontFamily,
+        fontScalingFactor = state.readerFontScaleFactor,
+        lineHeightScalingFactor = state.readerLineHeightScaleFactor,
+      )
+
     AppTheme(
       useDarkTheme = isDarkTheme,
-      typography = typography,
+      typography = readerTypography,
       overriddenColorScheme = overriddenColorScheme,
     ) {
       val nestedScrollModifier =

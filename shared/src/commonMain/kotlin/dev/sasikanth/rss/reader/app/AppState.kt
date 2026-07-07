@@ -23,6 +23,7 @@ import dev.sasikanth.rss.reader.core.model.local.Source
 import dev.sasikanth.rss.reader.core.model.local.ThemeVariant
 import dev.sasikanth.rss.reader.data.repository.AppThemeMode
 import dev.sasikanth.rss.reader.data.repository.HomeViewMode
+import dev.sasikanth.rss.reader.data.repository.ReaderFont
 
 data class AppState(
   val appThemeMode: AppThemeMode,
@@ -37,6 +38,7 @@ data class AppState(
   val postsSortOrder: PostsSortOrder,
   val showChangelog: Boolean,
   val versionName: String,
+  val readerFont: ReaderFont = ReaderFont.Outfit,
 ) {
 
   companion object {

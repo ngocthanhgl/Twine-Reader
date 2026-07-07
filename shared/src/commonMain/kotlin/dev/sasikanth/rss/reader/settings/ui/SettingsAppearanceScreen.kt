@@ -85,6 +85,7 @@ import dev.sasikanth.rss.reader.settings.SettingsState
 import dev.sasikanth.rss.reader.settings.SettingsViewModel
 import dev.sasikanth.rss.reader.settings.ui.items.AppIconSelectionSheet
 import dev.sasikanth.rss.reader.settings.ui.items.AppIconSettingItem
+import dev.sasikanth.rss.reader.settings.ui.items.ReaderFontSettingItem
 import dev.sasikanth.rss.reader.settings.ui.items.ThemeVariantSettingItem
 import dev.sasikanth.rss.reader.ui.AppTheme
 import dev.sasikanth.rss.reader.utils.LocalShowFeedFavIconSetting
@@ -292,6 +293,14 @@ private fun SettingsAppearanceContent(
             appIcon = state.appIcon,
             isSubscribed = state.isSubscribed,
             onClick = { dispatch(SettingsEvent.AppIconClicked) },
+          )
+        }
+
+        item {
+          ReaderFontSettingItem(
+            readerFont = state.readerFont,
+            isSubscribed = state.isSubscribed,
+            onReaderFontChanged = { dispatch(SettingsEvent.OnReaderFontChanged(it)) },
           )
         }
       }

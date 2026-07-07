@@ -23,6 +23,7 @@ import dev.sasikanth.rss.reader.data.repository.AppThemeMode
 import dev.sasikanth.rss.reader.data.repository.AudioMarkAsReadThreshold
 import dev.sasikanth.rss.reader.data.repository.BrowserType
 import dev.sasikanth.rss.reader.data.repository.HomeViewMode
+import dev.sasikanth.rss.reader.data.repository.ReaderFont
 import dev.sasikanth.rss.reader.data.repository.MarkAsReadOn
 import dev.sasikanth.rss.reader.data.repository.Period
 import dev.sasikanth.rss.reader.data.sync.CloudServiceProvider
@@ -89,6 +90,8 @@ sealed interface SettingsEvent {
   data object CloseAppIconSelectionSheet : SettingsEvent
 
   data class OnAppIconChanged(val appIcon: AppIcon) : SettingsEvent
+
+  data class OnReaderFontChanged(val readerFont: ReaderFont) : SettingsEvent
 
   data object DeleteAppData : SettingsEvent
 

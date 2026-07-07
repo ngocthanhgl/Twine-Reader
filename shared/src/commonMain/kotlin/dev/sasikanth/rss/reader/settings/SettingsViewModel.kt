@@ -38,6 +38,7 @@ import dev.sasikanth.rss.reader.data.repository.BrowserType
 import dev.sasikanth.rss.reader.data.repository.HomeViewMode
 import dev.sasikanth.rss.reader.data.repository.MarkAsReadOn
 import dev.sasikanth.rss.reader.data.repository.Period
+import dev.sasikanth.rss.reader.data.repository.ReaderFont
 import dev.sasikanth.rss.reader.data.repository.RssRepository
 import dev.sasikanth.rss.reader.data.repository.SettingsRepository
 import dev.sasikanth.rss.reader.data.repository.UserRepository
@@ -212,6 +213,10 @@ class SettingsViewModel(
     opmlManager.result
       .onEach { result -> _state.update { it.copy(opmlResult = result) } }
       .launchIn(viewModelScope)
+
+    settingsRepository.readerFontStyle
+      .onEach { font -> _state.update { it.copy(readerFont = font) } }
+      .launchIn(viewModelScope)
   }
 
   fun dispatch(event: SettingsEvent) {
@@ -259,6 +264,7 @@ class SettingsViewModel(
       SettingsEvent.MarkFreeFeedLimitWarningAsDone -> {
         _state.update { it.copy(showFreeFeedLimitWarning = false) }
       }
+      is SettingsEvent.OnReaderFontChanged -> onReaderFontChanged(event.readerFont)
     }
   }
 
@@ -447,6 +453,10 @@ class SettingsViewModel(
         _state.update { it.copy(openPaywall = true) }
       }
     }
+  }
+
+  private fun onReaderFontChanged(readerFont: ReaderFont) {
+    viewModelScope.launch { settingsRepository.updateReaderFont(readerFont) }
   }
 
   private fun updateBrowserType(browserType: BrowserType) {

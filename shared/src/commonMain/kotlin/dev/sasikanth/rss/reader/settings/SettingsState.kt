@@ -28,6 +28,7 @@ import dev.sasikanth.rss.reader.data.repository.AppThemeMode
 import dev.sasikanth.rss.reader.data.repository.AudioMarkAsReadThreshold
 import dev.sasikanth.rss.reader.data.repository.BrowserType
 import dev.sasikanth.rss.reader.data.repository.HomeViewMode
+import dev.sasikanth.rss.reader.data.repository.ReaderFont
 import dev.sasikanth.rss.reader.data.repository.MarkAsReadOn
 import dev.sasikanth.rss.reader.data.repository.Period
 import kotlin.time.Instant
@@ -68,6 +69,7 @@ data class SettingsState(
   val opmlFeedsToSelect: List<OpmlFeed>?,
   val showFreeFeedLimitWarning: Boolean,
   val blockedWordsCount: Int,
+  val readerFont: ReaderFont,
 ) {
 
   val isSubscribed: Boolean
@@ -121,6 +123,7 @@ data class SettingsState(
         opmlFeedsToSelect = null,
         showFreeFeedLimitWarning = false,
         blockedWordsCount = 0,
+        readerFont = ReaderFont.Outfit,
       )
   }
 }

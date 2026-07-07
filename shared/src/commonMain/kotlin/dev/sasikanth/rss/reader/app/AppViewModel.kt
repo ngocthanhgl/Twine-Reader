@@ -28,6 +28,7 @@ import dev.sasikanth.rss.reader.core.model.local.ThemeVariant
 import dev.sasikanth.rss.reader.data.refreshpolicy.RefreshPolicy
 import dev.sasikanth.rss.reader.data.repository.AppThemeMode
 import dev.sasikanth.rss.reader.data.repository.HomeViewMode
+import dev.sasikanth.rss.reader.data.repository.ReaderFont
 import dev.sasikanth.rss.reader.data.repository.ObservableActiveSource
 import dev.sasikanth.rss.reader.data.repository.RssRepository
 import dev.sasikanth.rss.reader.data.repository.SettingsRepository
@@ -78,6 +79,10 @@ class AppViewModel(
   init {
     refreshFeedsIfExpired()
     setupSessionTracking()
+
+    settingsRepository.readerFontStyle
+      .onEach { font -> _state.update { it.copy(readerFont = font) } }
+      .launchIn(viewModelScope)
 
     viewModelScope.launch {
       val isOnboardingDone = settingsRepository.isOnboardingDone.first()

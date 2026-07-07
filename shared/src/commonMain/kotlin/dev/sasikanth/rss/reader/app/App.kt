@@ -58,6 +58,7 @@ import dev.sasikanth.rss.reader.changelog.ui.ChangelogSheet
 import dev.sasikanth.rss.reader.core.model.local.ResolvedPost
 import dev.sasikanth.rss.reader.core.model.local.ThemeVariant
 import dev.sasikanth.rss.reader.data.repository.AppThemeMode
+import dev.sasikanth.rss.reader.data.repository.ReaderFont
 import dev.sasikanth.rss.reader.discovery.DiscoveryViewModel
 import dev.sasikanth.rss.reader.feed.FeedViewModel
 import dev.sasikanth.rss.reader.feedhealth.FeedHealthViewModel
@@ -85,14 +86,23 @@ import dev.sasikanth.rss.reader.share.LocalShareHandler
 import dev.sasikanth.rss.reader.share.ShareHandler
 import dev.sasikanth.rss.reader.statistics.StatisticsViewModel
 import dev.sasikanth.rss.reader.ui.AppTheme
+import dev.sasikanth.rss.reader.ui.ComicNeueFontFamily
+import dev.sasikanth.rss.reader.ui.GolosFontFamily
+import dev.sasikanth.rss.reader.ui.GoogleSansFontFamily
 import dev.sasikanth.rss.reader.ui.LocalDynamicColorState
 import dev.sasikanth.rss.reader.ui.LocalSeedColorExtractor
+import dev.sasikanth.rss.reader.ui.LoraFontFamily
+import dev.sasikanth.rss.reader.ui.MerriWeatherFontFamily
+import dev.sasikanth.rss.reader.ui.OutfitFontFamily
+import dev.sasikanth.rss.reader.ui.RobotoSerifFontFamily
 import dev.sasikanth.rss.reader.ui.SeedColorExtractor
 import dev.sasikanth.rss.reader.ui.darkAppColorScheme
 import dev.sasikanth.rss.reader.ui.getOverriddenColorScheme
 import dev.sasikanth.rss.reader.ui.lightAppColorScheme
 import dev.sasikanth.rss.reader.ui.rememberDynamicColorState
 import dev.sasikanth.rss.reader.ui.systemDynamicColorScheme
+import dev.sasikanth.rss.reader.ui.typography
+import dev.sasikanth.rss.reader.ui.typography
 import dev.sasikanth.rss.reader.utils.ExternalUriHandler
 import dev.sasikanth.rss.reader.utils.InAppRating
 import dev.sasikanth.rss.reader.utils.LocalAmoledSetting
@@ -283,7 +293,23 @@ fun App(
       }
     }
 
-    AppTheme(useDarkTheme = useDarkTheme, overriddenColorScheme = overriddenColorScheme) {
+    val fontFamily =
+      when (appState.readerFont) {
+        ReaderFont.ComicNeue -> ComicNeueFontFamily
+        ReaderFont.GoogleSans -> GoogleSansFontFamily
+        ReaderFont.Golos -> GolosFontFamily
+        ReaderFont.Lora -> LoraFontFamily
+        ReaderFont.Merriweather -> MerriWeatherFontFamily
+        ReaderFont.RobotoSerif -> RobotoSerifFontFamily
+        ReaderFont.Outfit -> OutfitFontFamily
+      }
+    val appTypography = typography(fontFamily = fontFamily)
+
+    AppTheme(
+      useDarkTheme = useDarkTheme,
+      typography = appTypography,
+      overriddenColorScheme = overriddenColorScheme,
+    ) {
       NavHost(
         navController = navController,
         startDestination = Screen.Placeholder,
