@@ -3,8 +3,6 @@ name: Android CI
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -26,14 +24,21 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Build fossDebug APK
-        run: ./gradlew assembleFossDebug
+      - name: Create CI keystore
+        run: |
+          mkdir -p release
+          keytool -genkey -v -keystore release/reader.jks \
+            -alias reader_alias -keyalg RSA -keysize 2048 -validity 10000 \
+            -storepass android -keypass android \
+            -dname "CN=CI, OU=CI, O=CI, L=CI, S=CI, C=CI"
+
+      - name: Build fullRelease APK
+        run: ./gradlew assembleFullRelease -PREADER_KEYSTORE_PASSWORD=android -PREADER_KEY_PASSWORD=android -PVERSION_CODE=${{ github.run_number }} -PVERSION_NAME=1.0.${{ github.run_number }}
         env:
-          VERSION_CODE: ${{ github.run_number }}
-          VERSION_NAME: 1.0.${{ github.run_number }}
+          BUGSNAG_API_KEY: ""
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: twine-foss-debug
-          path: androidApp/build/outputs/apk/foss/debug/*.apk
+          name: twine-full-release
+          path: androidApp/build/outputs/apk/full/release/*.apk
