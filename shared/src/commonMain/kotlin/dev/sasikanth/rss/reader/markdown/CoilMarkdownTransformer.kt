@@ -22,6 +22,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,6 +31,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
+import coil3.compose.AsyncImagePainter
 import coil3.compose.LocalPlatformContext
 import coil3.compose.rememberAsyncImagePainter
 import coil3.request.ImageRequest
@@ -62,6 +65,11 @@ object CoilMarkdownTransformer : ImageTransformer {
 
   @Composable
   override fun intrinsicSize(painter: Painter): Size {
-    return Size.Unspecified
+    return if (painter is AsyncImagePainter) {
+      val state by painter.state.collectAsState()
+      state.painter?.intrinsicSize ?: Size.Unspecified
+    } else {
+      painter.intrinsicSize
+    }
   }
 }
