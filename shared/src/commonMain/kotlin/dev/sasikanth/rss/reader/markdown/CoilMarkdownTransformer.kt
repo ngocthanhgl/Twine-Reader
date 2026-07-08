@@ -61,6 +61,6 @@ object CoilMarkdownTransformer : ImageTransformer {
 
   @Composable
   override fun intrinsicSize(painter: Painter): Size {
-    return Size.Unspecified
+    return Size(10000f, 10000f)
   }
 }
