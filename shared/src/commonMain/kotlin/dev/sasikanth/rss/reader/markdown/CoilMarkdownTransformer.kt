@@ -62,6 +62,13 @@ object CoilMarkdownTransformer : ImageTransformer {
 
   @Composable
   override fun intrinsicSize(painter: Painter): Size {
-    return Size(10000f, 10000f)
+    val size = painter.intrinsicSize
+    if (size == Size.Unspecified || size.width <= 0f || size.height <= 0f) {
+      return Size(10000f, 10000f)
+    }
+    val minHeight = 500f
+    if (size.height >= minHeight) return size
+    val scale = minHeight / size.height
+    return Size(size.width * scale, size.height * scale)
   }
 }
